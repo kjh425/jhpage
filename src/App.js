@@ -26,6 +26,9 @@ import BoardDetail from './pages/detail';
 
 function App() {
   const { authInfo, handleLogin, handleLogout} = useAuth();
+  const handleNotionLinkClick = () => {
+      window.open("https://www.notion.so/s-942431e2ef5c4f1fbdc106a401bbfb62");
+  };
 
 
   // 스프링하고 연동 테스트
@@ -64,7 +67,7 @@ function App() {
               <NavDropdown.Item href="/madmovie">장례식장 매드무비</NavDropdown.Item>
               <NavDropdown.Item href="/roadmap">로드맵(나의 성장일기)</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="https://www.notion.so/s-942431e2ef5c4f1fbdc106a401bbfb62">
+              <NavDropdown.Item onClick={handleNotionLinkClick}>
                 김준한의 노션
               </NavDropdown.Item>
             </NavDropdown>

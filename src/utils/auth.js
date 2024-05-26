@@ -1,9 +1,11 @@
 // auth.js
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
   const [authInfo, setAuthInfo] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -25,6 +27,9 @@ export const useAuth = () => {
       localStorage.setItem('user',JSON.stringify(user));
       localStorage.setItem('token', token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      alert('로그인 되었습니다.');
+      navigate('/');
+      window.location.reload();
     } else {
       alert('로그인에 실패하였습니다.')
     }
