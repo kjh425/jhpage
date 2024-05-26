@@ -33,7 +33,7 @@ const SignUp = () => {
                 email,
             };
   
-            const response = await axios.post('http://localhost:8080/member/signUp.do', formData, {
+            const response = await axios.post('/member/signUp.do', formData, {
               withCredentials: true,
               headers: {
                 'X-CSRF-TOKEN': csrfToken
@@ -79,6 +79,7 @@ const compareCode = () => {
   };
   const handleSendEmail = async () => {
     try {
+      alert('인증번호를 이메일로 전송합니다. 확인을 누르고 이메일에 발송된 번호를 입력해주세요. 실제 이메일이 아닐 시 발송되지 않을 수 있습니다.');
       // await 키워드를 사용하여 sendEmail 함수의 비동기 작업이 완료될 때까지 기다립니다.
       const response = await sendEmail(email);
       console.log('아니여긴 된다니까?');
@@ -101,7 +102,7 @@ const compareCode = () => {
   const sendEmail = async (email) => {
     try {
       const response = await axios.post(
-        'http://localhost:8080/member/sendCode.do',
+        '/member/sendCode.do',
         null,
         {
           params: { email },

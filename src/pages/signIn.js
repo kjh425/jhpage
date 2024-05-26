@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../utils/auth';
 
@@ -7,16 +7,9 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const { authInfo, handleLogin } = useAuth();
 
-  useEffect(() => {
-    // 컴포넌트가 처음 마운트될 때 로컬 스토리지에서 토큰을 읽어옴
-    const storedToken = localStorage.getItem('token');
-    if (storedToken) {
-      // 토큰이 존재하면 handleLogin을 호출하여 인증 정보를 설정
-      handleLogin(JSON.parse(storedToken));
-    }
-  }, []);
 
   const handleSignIn = async (event) => {
+    event.preventDefault();
     try {
       const response = await axios.post('/member/signIn', {
         memberId: memberId,
@@ -27,7 +20,7 @@ const SignIn = () => {
       handleLogin(response);
     } catch (error) {
       // 로그인 실패 시 처리
-      console.error('로그인 실패:', error.response.data);
+      console.error('로그인 실패:', error.response.data ? error.response.data : error.message);
     }
   };
 

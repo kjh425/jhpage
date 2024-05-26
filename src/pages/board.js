@@ -13,7 +13,7 @@ const Board = () => {
   useEffect(() => {
     const fetchBoardList = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/board');
+        const response = await axios.get('/board');
         setBoardList(response.data);
       } catch (error) {
         console.error('Error fetching board list:', error);
@@ -33,7 +33,7 @@ const Board = () => {
   };
 
   const redirectToDetail = (boardId) => {
-    axios.get(`http://localhost:8080/board/boardDetail?boardId=${boardId}`)
+    axios.get(`/board/boardDetail?boardId=${boardId}`)
     .then(response => {
     navigate(`/boardDetail?boardId=${boardId}`);
     console.log(response.data);

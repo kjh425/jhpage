@@ -27,10 +27,6 @@ import BoardDetail from './pages/detail';
 function App() {
   const { authInfo, handleLogin, handleLogout} = useAuth();
 
-  useEffect(() => {
-    // checkStoredToken 대신 handleLogin 호출
-    handleLogin();
-  }, [handleLogin]);
 
   // 스프링하고 연동 테스트
   const [message, setMessage] = useState([]);
