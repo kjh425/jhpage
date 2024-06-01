@@ -13,16 +13,16 @@ import 배너2 from './img/배너2.jpg'
 import 배너3 from './img/배너3.jpg'
 //페이지 임포트
 import Introduce from './pages/introduce';
-import Board from './pages/board';
+import Board from './pages/board/board';
 import Roadmap from './pages/roadmap';
 import Madmovie from './pages/madmovie';
 import SignIn from './pages/signIn';
 import SignUp from './pages/signUp';
-import BoardCreate from './pages/boardCreate';
+import BoardCreate from './pages/board/boardCreate';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from './utils/auth';
-import BoardDetail from './pages/detail';
+import BoardDetail from './pages/board/boardDetail';
 
 function App() {
   const { authInfo, handleLogin, handleLogout} = useAuth();
@@ -44,6 +44,11 @@ function App() {
         setMessage(data);
       });
     }, []);
+
+    if (authInfo === null) {
+      // authInfo가 설정될 때까지 로딩 상태를 표시
+      return <div>Loading...</div>;
+    }
 
     return (
     <div className='App'>
@@ -76,13 +81,13 @@ function App() {
       </Container>
       <div style={{ display: 'flex', justifyContent: 'space-between',marginRight : '130px' }}>
           {/* 로그인 상태인 경우에는 버튼을 숨김 */}
-          {!authInfo && (
+          {!authInfo.token && (
             <div style={{marginRight:'8px'}}>
               <Button variant="outline-primary" href="/signIn">로그인</Button>{' '}
             </div>
           )}
           {/* 로그인 상태인 경우에는 버튼을 숨김 */}
-          {!authInfo && (
+          {!authInfo.token && (
             <div>
               <Button variant="outline-success" href='/signUp'>회원가입</Button>{' '}
             </div>

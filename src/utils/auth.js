@@ -16,6 +16,8 @@ export const useAuth = () => {
         token : storedToken,
         user : JSON.parse(storedUser),
       });
+    }else {
+      setAuthInfo({}); // 인증 정보가 없으면 빈 객체로 설정
     }
   }, []); // 처음 마운트 시에만 실행
 
@@ -40,6 +42,9 @@ export const useAuth = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     delete axios.defaults.headers.common['Authorization'];
+    alert('로그아웃 되었습니다.');
+    navigate('/');
+    window.location.reload(); // 페이지 리로드 추가
   };
 
   return { authInfo, handleLogin, handleLogout };
