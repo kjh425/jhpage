@@ -1,0 +1,13 @@
+.board-tb{
+    width: 1080px;
+    text-align: center;
+    
+}
+
+.board-list-div{
+    flex-wrap: wrap;
+}
+
+#board-insert-btn{
+    float: right;
+}

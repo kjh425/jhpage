@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { useAuth } from '../../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/common.css';
+import '../../styles/board/board.css';
 
 const Board = () => {
   const [boardList, setBoardList] = useState([]);
@@ -41,14 +43,15 @@ const Board = () => {
   };
 
   return (
-    <div>
-      <Button variant="outline-success" onClick={boardCreate}>
+    <div className='common-container'>
+      <Button variant="outline-success" onClick={boardCreate} id='board-insert-btn'>
         글쓰기
       </Button>{' '}
+      <div className='board-list-div'>
       <Table striped="columns" className="board-tb">
         <thead>
           <tr>
-            <th>#</th>
+            <th style={{width:'100px'}}>게시글번호</th>
             <th>제목</th>
             <th>작성일</th>
             <th>작성자</th>
@@ -56,15 +59,16 @@ const Board = () => {
         </thead>
         <tbody>
           {boardList.map((board) => (
-            <tr key={board.boardId} onClick={() => redirectToDetail(board.boardId)}>
+            <tr key={board.boardId} >
               <td>{board.boardId}</td>
-              <td>{board.title}</td>
+              <td onClick={() => redirectToDetail(board.boardId)}>{board.title} </td>
               <td>{board.regdate}</td>
               <td>{board.writer}</td>
             </tr>
           ))}
         </tbody>
       </Table>
+      </div>
     </div>
   );
 };

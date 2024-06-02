@@ -9,6 +9,25 @@ const BoardDetail = () => {
   const { authInfo } = useAuth();
   const navigate = useNavigate();
 
+  const deleteBoardContent = async () =>{
+    console.log('받아오는건?'+boardId);
+    try {
+      await axios.delete('/board/deleteBoardContent',{
+        headers: {
+          // 'X-CSRF-TOKEN': csrfToken
+          Authorization: `Bearer ${authInfo.token}`,
+      },
+        params : {boardId}
+      });
+        alert('삭제완료');
+        navigate('/board');
+    } catch (error) {
+      console.error('삭제실패',error);
+    }
+    
+  }
+
+
   useEffect(() => {
     // authInfo가 null일 때는 아무 것도 하지 않음
     if (authInfo === null) {
@@ -50,6 +69,7 @@ const BoardDetail = () => {
   // board 객체의 내용을 출력
   return (
     <div>
+      <button type='button' onClick={deleteBoardContent}>삭제</button>
       <h1>Detail</h1>
       <p>Title: {board.title}</p>
       <p>Content: {board.content}</p>
