@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import 배너 from './img/배너.jpg';
 import 배너2 from './img/배너2.jpg'
@@ -20,12 +20,13 @@ import SignIn from './pages/signIn';
 import SignUp from './pages/signUp';
 import BoardCreate from './pages/board/boardCreate';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useAuth } from './utils/auth';
 import BoardDetail from './pages/board/boardDetail';
+import MyAI from './pages/myAI';
+
 
 function App() {
-  const { authInfo, handleLogin, handleLogout} = useAuth();
+  const { authInfo,  handleLogout} = useAuth();
   const handleNotionLinkClick = () => {
       window.open("https://www.notion.so/s-942431e2ef5c4f1fbdc106a401bbfb62");
   };
@@ -76,6 +77,7 @@ function App() {
                 김준한의 노션
               </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link href="/myAI">내가 만든 생성형 AI</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -140,6 +142,7 @@ function App() {
       <Route path='/signUp' element={<SignUp/>}></Route>
       <Route path='/boardCreate' element={<BoardCreate/>}></Route>
       <Route path='/boardDetail/:boardId' element={<BoardDetail/>}></Route>
+      <Route path='/myAI' element={<MyAI/>}></Route>
     </Routes>
     </div>
   );
